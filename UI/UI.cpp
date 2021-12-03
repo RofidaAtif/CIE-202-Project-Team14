@@ -83,7 +83,8 @@ ActionType UI::GetUserAction() const
 {	
 	int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
-
+	SetX(x);SetY(y);
+	
 	if(AppMode == DESIGN )	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar
@@ -118,6 +119,25 @@ ActionType UI::GetUserAction() const
 		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
 	}
 
+}
+
+void UI::SetX(int x)
+{
+	xcl = x;
+
+}
+void UI::SetY(int y)
+{
+	ycl = y;
+
+}
+int UI::GetX()
+{
+	return xcl;
+}
+int UI::GetY()
+{
+	return ycl;
 }
 
 
