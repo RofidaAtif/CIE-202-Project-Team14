@@ -55,7 +55,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 ////////////////////////////////////////////////////////////////////
+Component* ApplicationManager::GetCompList(int i)
+{
+	return CompList[i];
+}
 
+
+////////////////////////////////////////////////////////////////////
+int ApplicationManager::GetCount()
+{
+	return CompCount;
+}
+
+////////////////////////////////////////////////////////////////////
 void ApplicationManager::UpdateInterface()
 {
 		for(int i=0; i<CompCount; i++)
