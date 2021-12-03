@@ -38,8 +38,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
+		
+		case SELECT:
+			pAct = new ActionSelection(this);
+			break;
 	
-
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
@@ -52,7 +55,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 ////////////////////////////////////////////////////////////////////
+Component* ApplicationManager::GetCompList(int i)
+{
+	return CompList[i];
+}
 
+
+////////////////////////////////////////////////////////////////////
+int ApplicationManager::GetCount()
+{
+	return CompCount;
+}
+
+////////////////////////////////////////////////////////////////////
 void ApplicationManager::UpdateInterface()
 {
 		for(int i=0; i<CompCount; i++)

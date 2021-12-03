@@ -16,3 +16,25 @@ Component::Component()
 Component::~Component()
 {}
 
+bool Component::GetSelected() {
+	return Selected;
+}
+void Component::Select(int Sx, int Sy)
+{
+
+	int x1 = m_pGfxInfo->PointsList[0].x;
+	int y1 = m_pGfxInfo->PointsList[0].y;
+	int x2 = m_pGfxInfo->PointsList[1].x;
+	int y2 = m_pGfxInfo->PointsList[1].y;
+	
+	if (Sx <= x2 && Sx >= x1 && Sy <= y2 && Sy >= y1)
+	{
+		Selected = !Selected;
+	}
+	else
+	{
+		Selected = false;
+	}
+	
+}
+
