@@ -38,8 +38,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
+		
+		case SELECT:
+			pAct = new ActionSelection(this);
+			break;
 	
-
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
