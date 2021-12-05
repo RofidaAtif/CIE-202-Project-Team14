@@ -39,7 +39,8 @@ class UI
 		//Note: Items are ordered here as they appear in the menu
 		//If you want to change the menu items order, just change the order here
 		ITM_RES,		//Resistor item in menu
-	
+		ITM_LAMP,		//Lamp item in menu
+		ITM_SWITCH,		//Switch in menu
 		ITM_EXIT,		//Exit item
 		//TODO: Add more items names here
 	
@@ -88,10 +89,6 @@ public:
 	UI();
 	int getCompWidth() const;	//returns Component width
 	int getCompHeight() const;	//returns Component height
-	void SetX(int x);
-	void SetY(int y);
-	int GetX();
-	int GetY();
 	
 	
 	// Input Functions  ---------------------------
@@ -114,7 +111,8 @@ public:
 		
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
-
+	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
 
 	// Draws Connection
