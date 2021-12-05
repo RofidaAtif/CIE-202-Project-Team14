@@ -11,6 +11,7 @@ class Component
 {
 private:
 	string m_Label;
+	bool Selected;
 protected:
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
@@ -35,14 +36,16 @@ public:
 	virtual void Operate() = 0;	//Calculates the output voltage according to the inputs
 	virtual void Draw(UI* ) = 0;	//for each component to Draw itself
 	
-	
+	bool GetSelected(); 
 	//virtual int GetOutPinStatus()=0;	//returns status of outputpin if LED, return -1
 	//virtual int GetInputPinStatus(int n)=0;	//returns status of Inputpin # n if SWITCH, return -1
 
 	//virtual void setInputPinStatus(int n, STATUS s)=0;	//set status of Inputpin # n, to be used by connection class.
 
 	
-	Component();	
+	Component();
+	
+	void Select(int Sx,int Sy);
 	
 	//Destructor must be virtual
 	virtual ~Component();
