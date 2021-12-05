@@ -83,8 +83,7 @@ ActionType UI::GetUserAction() const
 {	
 	int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
-	SetX(x);SetY(y);
-	
+
 	if(AppMode == DESIGN )	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar
@@ -99,6 +98,8 @@ ActionType UI::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 			case ITM_RES:	return ADD_RESISTOR;
+			case ITM_LAMP:  return ADD_LAMP;
+			case ITM_SWITCH:  return  ADD_SWITCH;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -119,25 +120,6 @@ ActionType UI::GetUserAction() const
 		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
 	}
 
-}
-
-void UI::SetX(int x)
-{
-	xcl = x;
-
-}
-void UI::SetY(int y)
-{
-	ycl = y;
-
-}
-int UI::GetX()
-{
-	return xcl;
-}
-int UI::GetY()
-{
-	return ycl;
 }
 
 
@@ -202,6 +184,8 @@ void UI::CreateDesignToolBar()
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
+	MenuItemImages[ITM_LAMP] = "images\\Menu\\Menu_Lamp.jpg";
+	MenuItemImages[ITM_SWITCH] = "images\\Menu\\Menu_Switch.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -241,6 +225,28 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string SwitchImage;
+	if (selected)
+		SwitchImage = "Images\\Comp\\Menu_Switch.jpg";	//use image of highlighted resistor
+	else
+		SwitchImage = "Images\\Comp\\Menu_Switch.jpg";	//use image of the normal resistor
+
+	//Draw Resistor at Gfx_Info (1st corner)
+	pWind->DrawImage(SwitchImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string LampImage;
+	if (selected)
+		LampImage = "Images\\Comp\\Menu_Lamp.jpg";	//use image of highlighted resistor
+	else
+		LampImage = "Images\\Comp\\Menu_Lamp.jpg";	//use image of the normal resistor
+
+	//Draw Resistor at Gfx_Info (1st corner)
+	pWind->DrawImage(LampImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
 //TODO: Add similar functions to draw all other components
