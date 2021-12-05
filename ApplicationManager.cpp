@@ -1,6 +1,7 @@
 #include "ApplicationManager.h"
 #include "Actions\ActionAddRes.h"
-
+#include "Actions\ActionAddSwitch.h"
+#include "Actions\ActionAddLamp.h"
 
 ApplicationManager::ApplicationManager()
 {
@@ -34,15 +35,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_RESISTOR:
 			pAct= new ActionAddRes(this);
 			break;
-
+		case ADD_LAMP:
+			pAct = new ActionAddLamp(this);
+			break;
+		case ADD_SWITCH:
+			pAct = new ActionAddSwitch(this);
+			break;
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
-		
-		case SELECT:
-			pAct = new ActionSelection(this);
-			break;
 	
+
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
@@ -55,19 +58,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 ////////////////////////////////////////////////////////////////////
-Component* ApplicationManager::GetCompList(int i)
-{
-	return CompList[i];
-}
 
-
-////////////////////////////////////////////////////////////////////
-int ApplicationManager::GetCount()
-{
-	return CompCount;
-}
-
-////////////////////////////////////////////////////////////////////
 void ApplicationManager::UpdateInterface()
 {
 		for(int i=0; i<CompCount; i++)
