@@ -13,8 +13,14 @@ Component::Component()
 
 }
 
-Component::~Component()
-{}
+int Component::getCompCenterX(UI* pUI) {
+	return m_pGfxInfo->PointsList[0].x + pUI->getCompWidth() / 2;
+}
+int Component::getCompCenterY(UI* pUI) {
+	return m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+}
+
+
 
 bool Component::GetSelected() {
 	return Selected;
@@ -37,4 +43,7 @@ void Component::Select(int Sx, int Sy)
 	}
 	
 }
+
+Component::~Component()
+{}
 
