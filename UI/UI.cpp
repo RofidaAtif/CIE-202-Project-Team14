@@ -83,6 +83,7 @@ ActionType UI::GetUserAction()
 {	
 	int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+	SetX(x);SetY(y);
 
 	if(AppMode == DESIGN )	//application is in design mode
 	{
@@ -122,6 +123,24 @@ ActionType UI::GetUserAction()
 
 }
 
+void UI::SetX(int x)
+{
+	xcl = x;
+
+}
+void UI::SetY(int y)
+{
+	ycl = y;
+
+}
+int UI::GetX()
+{
+	return xcl;
+}
+int UI::GetY()
+{
+	return ycl;
+}
 
 
 //======================================================================================//
