@@ -101,6 +101,7 @@ ActionType UI::GetUserAction()
 			case ITM_RES:	return ADD_RESISTOR;
 			case ITM_LAMP:  return ADD_LAMP;
 			case ITM_SWITCH:  return  ADD_SWITCH;
+			case ITM_CONN:  return ADD_CONNECTION;
 			case ITM_EXIT:	return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -205,6 +206,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
 	MenuItemImages[ITM_LAMP] = "images\\Menu\\Menu_Lamp.jpg";
 	MenuItemImages[ITM_SWITCH] = "images\\Menu\\Menu_Switch.jpg";
+	MenuItemImages[ITM_CONN] = "images\\Menu\\Menu_Connection.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -245,6 +247,19 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
+
+void UI::DrawConnection(const GraphicsInfo &r_GfxInfo,int length ,bool selected) const
+{
+	string ConnImage;
+	if (selected)
+		ConnImage = "Images\\Comp\\Connection_HI.jpg";	//use image of highlighted connection
+	else
+		ConnImage = "Images\\Comp\\Connection.jpg";	//use image of the normal connection
+
+	
+	pWind->DrawImage(ConnImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, length, COMP_HEIGHT);
+}
+
 void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwitchImage;
