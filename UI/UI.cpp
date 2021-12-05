@@ -79,7 +79,7 @@ string UI::GetSrting()
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType UI::GetUserAction() const
+ActionType UI::GetUserAction()
 {	
 	int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
