@@ -288,10 +288,7 @@ void UI::DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected) const
 
 
 
-void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
-{
-	//TODO: Add code to draw connection
-}
+
 
 
 UI::~UI()
