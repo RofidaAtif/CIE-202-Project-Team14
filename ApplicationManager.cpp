@@ -3,13 +3,17 @@
 #include "Actions\ActionAddSwitch.h"
 #include "Actions\ActionAddLamp.h"
 #include "Actions\ActionSelection.h"
+#include "Actions\ActionAddConnection.h"
 
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
-
+	ConnCount = 0;
+	
 	for(int i=0; i<MaxCompCount; i++)
 		CompList[i] = nullptr;
+	for(int i=0; i<MaxConnCount; i++)
+		ConnList[i] = nullptr;
 
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
@@ -19,6 +23,40 @@ void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;		
 }
+
+////////////////////////////////////////////////////////////////////
+void ApplicationManager::AddConnection(Connection* pConn) 
+{
+	ConnList[ConnCount++] = pConn;
+}
+
+////////////////////////////////////////////////////////////////////
+Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
+	UI* pUI = GetUI();
+	int  IsLocated = 0;
+	int  DiffX, DiffY;
+	int compheight = pUI->getCompHeight();
+	int compwidth = pUI->getCompWidth();
+	for (int i = 0; i < CompCount; i++) {
+		
+		DiffX = abs(x - CompList[i]->getCompCenterX(pUI));
+		DiffY = abs(y - CompList[i]->getCompCenterY(pUI));
+		
+		if ((DiffY <= compheight / 2) && (DiffX <= compwidth / 2))
+		{
+			IsLocated = 1;
+			return CompList[i];
+
+			break;
+		}
+
+
+	}
+	if (IsLocated == 0)
+		return nullptr;
+}
+
+
 ////////////////////////////////////////////////////////////////////
 
 ActionType ApplicationManager::GetUserAction()
@@ -42,12 +80,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_SWITCH:
 			pAct = new ActionAddSwitch(this);
 			break;
-		case ADD_CONNECTION:
-			//TODO: Create AddConection Action here
-			break;
 	
 		case SELECT:
 			pAct = new ActionSelection(this);
+			break;
+			
+		case ADD_CONNECTION:
+			pAct= new ActionAddConnection(this);
 			break;
 			
 		case EXIT:
@@ -78,8 +117,10 @@ int ApplicationManager::GetCount()
 ////////////////////////////////////////////////////////////////////	
 void ApplicationManager::UpdateInterface()
 {
-		for(int i=0; i<CompCount; i++)
+	for(int i=0; i<CompCount; i++)
 			CompList[i]->Draw(pUI);
+	for(int i=0; i<ConnCount; i++)
+			ConnList[i]->Draw(pUI);
 
 }
 
@@ -95,6 +136,8 @@ ApplicationManager::~ApplicationManager()
 {
 	for(int i=0; i<CompCount; i++)
 		delete CompList[i];
+	for(int i=0; i<ConnCount; i++)
+		delete ConnList[i];
 	delete pUI;
 	
 }
