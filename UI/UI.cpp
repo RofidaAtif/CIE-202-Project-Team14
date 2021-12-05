@@ -264,9 +264,9 @@ void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwitchImage;
 	if (selected)
-		SwitchImage = "Images\\Comp\\Menu_Switch.jpg";	//use image of highlighted resistor
+		SwitchImage = "Images\\Comp\\Switch_HI.jpg";	//use image of highlighted resistor
 	else
-		SwitchImage = "Images\\Comp\\Menu_Switch.jpg";	//use image of the normal resistor
+		SwitchImage = "Images\\Comp\\Switch.jpg";	//use image of the normal resistor
 
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(SwitchImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -275,9 +275,9 @@ void UI::DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string LampImage;
 	if (selected)
-		LampImage = "Images\\Comp\\Menu_Lamp.jpg";	//use image of highlighted resistor
+		LampImage = "Images\\Comp\\Lamp_HI.jpg";	//use image of highlighted resistor
 	else
-		LampImage = "Images\\Comp\\Menu_Lamp.jpg";	//use image of the normal resistor
+		LampImage = "Images\\Comp\\Lamp.jpg";	//use image of the normal resistor
 
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(LampImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
