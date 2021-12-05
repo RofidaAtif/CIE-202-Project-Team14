@@ -89,7 +89,10 @@ public:
 	UI();
 	int getCompWidth() const;	//returns Component width
 	int getCompHeight() const;	//returns Component height
-	
+	void SetX(int x);
+	void SetY(int y);
+	int GetX();
+	int GetY();
 	
 	// Input Functions  ---------------------------
 	void GetPointClicked(int &, int &);	//Get coordinate where user clicks
