@@ -41,6 +41,7 @@ class UI
 		ITM_RES,		//Resistor item in menu
 		ITM_LAMP,		//Lamp item in menu
 		ITM_SWITCH,		//Switch in menu
+		ITM_CONN,
 		ITM_EXIT,		//Exit item
 		//TODO: Add more items names here
 	
