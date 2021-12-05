@@ -33,7 +33,7 @@ struct GraphicsInfo
 
 class UI
 {
-
+	int xcl, ycl;
 	enum DsgnMenuItem //The items of the design menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in the menu
