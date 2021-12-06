@@ -43,7 +43,10 @@ public:
 	void AddComponent(Component* pComp);
 	
 	Component * GetCompList(int i);
-	int GetCount();
+	Connection* GetConnList(int i);
+
+	int GetCompCount();
+	int GetConnCount();
 	void AddConnection(Connection* pConn);
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 
