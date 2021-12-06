@@ -248,18 +248,18 @@ void UI::DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected) const
 	pWind->DrawImage(ResImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 
-void UI::DrawConnection(const GraphicsInfo &r_GfxInfo,int length ,bool selected) const
+void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
-	string ConnImage;
 	if (selected)
-		ConnImage = "Images\\Comp\\Connection_HI.jpg";	//use image of highlighted connection
+	{
+		pWind->SetPen(RED, 10);
+	}
 	else
-		ConnImage = "Images\\Comp\\Connection.jpg";	//use image of the normal connection
-
-	
-	pWind->DrawImage(ConnImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, length, COMP_HEIGHT);
+	{
+		pWind->SetPen(BLACK, 10);
+	}
+	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
 }
-
 void UI::DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string SwitchImage;
