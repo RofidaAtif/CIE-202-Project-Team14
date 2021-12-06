@@ -33,8 +33,8 @@ void ActionAddConnection::Execute()
 	}
 	pUI->ClearStatusBar();
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
+	
 
-	//Calculate the rectangle Corners
 	if (comp1 != nullptr && comp2 != nullptr)
 	{
 		int compWidth = pUI->getCompWidth();
@@ -46,19 +46,18 @@ void ActionAddConnection::Execute()
 
 		if (x1 > x2) {
 			pGInfo->PointsList[0].x = x2 + (compWidth / 2);
-			pGInfo->PointsList[0].y = y2 - (compHeight / 2);
+			pGInfo->PointsList[0].y = y2;
 			pGInfo->PointsList[1].x = x1 - (compWidth / 2);
-			pGInfo->PointsList[1].y = y1 + (compHeight / 2);
+			pGInfo->PointsList[1].y = y1;
 		}
 		else if (x2 > x1) {
 			pGInfo->PointsList[0].x = x1 + compWidth / 2;
-			pGInfo->PointsList[0].y = y1 - compHeight / 2;
+			pGInfo->PointsList[0].y = y1;
 			pGInfo->PointsList[1].x = x2 - compWidth / 2;
-			pGInfo->PointsList[1].y = y2 + compHeight / 2;
+			pGInfo->PointsList[1].y = y2;
 		}
 
-		int length = abs(x1 - x2) - compWidth;
-		Connection* pC = new Connection(length, pGInfo, comp1, comp2);
+		Connection* pC = new Connection( pGInfo, comp1, comp2);
 
 		pManager->AddConnection(pC);
 	}
