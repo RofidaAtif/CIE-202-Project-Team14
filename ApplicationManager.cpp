@@ -39,8 +39,8 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	int compwidth = pUI->getCompWidth();
 	for (int i = 0; i < CompCount; i++) {
 		
-		DiffX = abs(x - CompList[i]->getCompCenterX(pUI));
-		DiffY = abs(y - CompList[i]->getCompCenterY(pUI));
+		DiffX = abs(x - CompList[i]->getCompCenterX(pUI)); //measure diffrence between x of clicked point and x of center of component
+		DiffY = abs(y - CompList[i]->getCompCenterY(pUI)); //measure diffrence between y of clicked point and y of center of component
 		
 		if ((DiffY <= compheight / 2) && (DiffX <= compwidth / 2))
 		{
