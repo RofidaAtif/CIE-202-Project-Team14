@@ -22,10 +22,10 @@ int Component::getCompCenterY(UI* pUI) {
 
 
 
-bool Component::GetSelected() {
-	return Selected;
+bool Component::GetCompSelected() {
+	return CompSelected;
 }
-void Component::Select(int Sx, int Sy)
+void Component::CompSelect(int Sx, int Sy)
 {
 
 	int x1 = m_pGfxInfo->PointsList[0].x;
@@ -35,11 +35,11 @@ void Component::Select(int Sx, int Sy)
 	
 	if (Sx <= x2 && Sx >= x1 && Sy <= y2 && Sy >= y1)
 	{
-		Selected = !Selected;
+		CompSelected = !CompSelected;
 	}
 	else
 	{
-		Selected = false;
+		CompSelected = false;
 	}
 	
 }
