@@ -16,11 +16,17 @@ void ActionSelection::Execute()
 	UI* pUI = pManager->GetUI();
 	Sx = pUI->GetX();
 	Sy = pUI->GetY();
-	int count = pManager->GetCount();
-	for (int i = 0;i < count;i++)
+	int Compcount = pManager->GetCompCount();
+	int Conncount = pManager->GetConnCount();
+	for (int i = 0;i < Compcount;i++)
 	{
-		Component* pC = pManager->GetCompList(i);
-		pC->Select(Sx, Sy);
+		Component* pComp = pManager->GetCompList(i);
+		pComp->CompSelect(Sx, Sy);
+	}
+	for (int i = 0;i < Conncount;i++)
+	{
+		Connection* pConn = pManager->GetConnList(i);
+		pConn->ConnSelect(Sx, Sy);
 	}
 
 
