@@ -17,6 +17,7 @@ class ApplicationManager
 private:
 	int CompCount;		//Actual number of Components
 	int ConnCount;	    //Actual number of Connections
+	Component* SLComp;
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
 
@@ -49,6 +50,11 @@ public:
 	int GetConnCount();
 	void AddConnection(Connection* pConn);
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
+
+	void SetCompSEL(Component* SEL);
+	Component* GetCompSEL();
+
+	void savefile(fstream& f);
 
 	//destructor
 	~ApplicationManager();
