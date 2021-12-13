@@ -41,8 +41,19 @@ class UI
 		ITM_RES,		//Resistor item in menu
 		ITM_LAMP,		//Lamp item in menu
 		ITM_SWITCH,		//Switch in menu
-		ITM_CONN,
-		ITM_EXIT,		//Exit item
+		ITM_BATTERY,
+		ITM_GROUND,
+		ITM_BUZZER,
+		ITM_FUSE,
+		ACT_MOVE,
+		ACT_COPY,
+		ACT_CUT,
+		ACT_PASTE,
+		ACT_DEL,
+		ACT_UNDO,
+		ACT_REDO,
+		ITM_EXIT,	//Exit item
+		SIM,
 		//TODO: Add more items names here
 	
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -53,7 +64,13 @@ class UI
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in menu
-		ITM_CIRC_SIM,	//Circuit Simulate menu item
+		AMMETER,
+		VOLTAMETER,
+		VALIDATE,
+		ITM_EXIT1,
+		DSN,
+		
+		//ITM_CIRC_SIM,	//Circuit Simulate menu item
 	
 		//TODO:Add more items names here
 	
@@ -65,15 +82,15 @@ class UI
 
 	MODE AppMode;		//Application Mode (design or simulation)
 	
-	static const int	width = 1200, height = 650,	//Window width and height
+	static const int	width = 1500, height = 800,	//Window width and height
 						wx = 15 , wy = 15,			//Window starting coordinates
 						StatusBarHeight = 50,	//Status Bar Height
 						ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 						ToolItemWidth = 80,		//Width of each item in toolbar menu
 
 						//Arbitrary values, you can change as you wish
-						COMP_WIDTH = 100,		//Component Image width
-						COMP_HEIGHT = 20;		//Component Image height
+						COMP_WIDTH = 80,		//Component Image width
+						COMP_HEIGHT = 30;		//Component Image height
 
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
@@ -113,12 +130,19 @@ public:
 	void ClearDrawingArea() const;	//Clears the drawing area
 
 		
-	// Draws a resistor
+	// Draws a component
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawGround(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawFuse(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void switchtosim();
+	void switchtodsn();
+	void ClearWindow();
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
-
+	
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	
