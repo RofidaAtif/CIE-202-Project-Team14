@@ -1,10 +1,19 @@
 #include "Component.h"
 
-Component::Component(GraphicsInfo *r_GfxInfo)
+Component::Component(GraphicsInfo *r_GfxInfo, int id, double val, string lbl)
 {
-	m_pGfxInfo = r_GfxInfo;	
+	m_pGfxInfo = r_GfxInfo;
+	m_Label = lbl;
+	m_Value = val;
+	m_ID = id;;	
 }
-
+Component::Component(GraphicsInfo* r_GfxInfo, int id, string lbl)
+{
+	m_pGfxInfo = r_GfxInfo;
+	m_Label = lbl;
+	m_Value = 0;
+	m_ID = id;
+}
 Component::Component()
 {
 	m_pGfxInfo = nullptr;
@@ -41,7 +50,43 @@ void Component::CompSelect(int Sx, int Sy)
 	{
 		CompSelected = false;
 	}
-	
+	if (CompSelected == true)
+	{
+
+		return this;
+	}
+	else
+	{
+		return nullptr;
+	}
+	void Component::SetLabel(string lbl)
+{
+	m_Label = lbl;
+}
+
+string Component::GetLabel()
+{
+	return m_Label;
+}
+
+
+void Component::SetValue(double val)
+{
+	m_Value = val;
+}
+
+
+
+
+double Component::GetValue()
+{
+	return m_Value;
+}
+int Component::GetID()
+{
+	return m_ID;
+}
+
 }
 
 Component::~Component()
