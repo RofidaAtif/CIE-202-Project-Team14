@@ -1,7 +1,9 @@
 #include "Lamp.h"
 
-Lamp::Lamp(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
-{}
+Lamp::Lamp(GraphicsInfo* r_GfxInfo,int id, double ires, string lbl) :Component(r_GfxInfo,id, ires, lbl)
+{
+	
+}
 
 void Lamp::Draw(UI* pUI)
 {
