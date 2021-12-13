@@ -4,6 +4,13 @@
 #include "Actions\ActionAddLamp.h"
 #include "Actions\ActionSelection.h"
 #include "Actions\ActionAddConnection.h"
+#include "Actions\ActionAddBattery.h"
+#include "Actions\ActionAddGround.h"
+#include "Actions\ActionAddBuzzer.h"
+#include "Actions\ActionAddFuse.h"
+#include "UI\UI.h"
+#include "Actions\SwitchToSIM.h"
+#include "Actions\SwitchToDSN.h"
 
 ApplicationManager::ApplicationManager()
 {
@@ -80,7 +87,25 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_SWITCH:
 			pAct = new ActionAddSwitch(this);
 			break;
-	
+		case ADD_BATTERY:
+			pAct = new ActionAddBattery(this);
+			break;
+		case ADD_GROUND:
+			pAct = new ActionAddGround(this);
+			break;
+		case ADD_BUZZER:
+			pAct = new ActionAddBuzzer(this);
+			break;
+		case ADD_FUSE:
+			pAct = new ActionAddFuse(this);
+			break;
+		case SIM_MODE: 
+			pAct = new SwitchToSIM(this);
+			break;
+		case DSN_MODE:
+			pAct = new SwitchToDSN(this);
+			break;
+			
 		case SELECT:
 			pAct = new ActionSelection(this);
 			break;
