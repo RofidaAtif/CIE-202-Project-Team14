@@ -59,7 +59,8 @@ void Component::CompSelect(int Sx, int Sy)
 	{
 		return nullptr;
 	}
-	void Component::SetLabel(string lbl)
+	
+void Component::SetLabel(string lbl)
 {
 	m_Label = lbl;
 }
