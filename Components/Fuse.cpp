@@ -13,7 +13,7 @@ void Fuse::Draw(UI* pUI)
 void Resistor::SaveFile(fstream& f) {
 	GraphicsInfo& Gfx = *m_pGfxInfo;
 
-	f << "RES" << "       " << to_string(GetID()) << "       " << GetLabel() << "       " << GetValue() << "       " << to_string(Gfx.PointsList[0].x) << "       " << to_string(Gfx.PointsList[0].y) << endl;
+	f << "FUSE" << "       " << to_string(GetID()) << "       " << GetLabel() << "       " << GetValue() << "       " << to_string(Gfx.PointsList[0].x) << "       " << to_string(Gfx.PointsList[0].y) << endl;
 }
 void Fuse::Operate()
 {
