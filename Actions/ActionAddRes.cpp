@@ -36,7 +36,39 @@ void ActionAddRes::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth/2;
 	pGInfo->PointsList[1].y = Cy + compHeight/2;
 	 
-	Resistor* pR = new Resistor(pGInfo);
+	//get the value of the resistance from the user as a string
+	RES = 0;
+	pUI->PrintMsg("enter the value of the resistance");
+	string res = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	stringstream Dres(res); //convert the string to a double 
+	int CHKRes = 0;
+	Dres >> CHKRes; //set the value of the resistance
+
+	while (RES == 0)
+	{
+		
+		if (CHKRes)
+		{
+			RES = CHKRes;
+		}
+		else
+		{
+			pUI->PrintMsg("Invalid value please enter another value");
+			string res = pUI->GetSrting();
+			pUI->ClearStatusBar();
+			stringstream Dres(res); //convert the string to a double 
+			Dres >> CHKRes;
+		}
+	}
+
+	//get the label name from the user
+	pUI->PrintMsg("enter the Name of the label");
+	LBL = pUI->GetSrting();
+	pUI->ClearStatusBar();
+
+	int ID = (pManager->GetCompCount()) + 1;
+	Resistor* pR = new Resistor(pGInfo, ID, RES, LBL);
 	pManager->AddComponent(pR);
 }
 
