@@ -37,7 +37,42 @@ void ActionAddLamp::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Lamp* pR = new Lamp(pGInfo);
+	
+	//get the value of the resistance from the user as a string then convert to double
+	IRES = 0;
+	pUI->PrintMsg("enter the value of the resistance of the lamp");
+	string ires = pUI->GetSrting();
+	pUI->ClearStatusBar();
+	stringstream Dres(ires); //convert the string to a double 
+	int CHKRes = 0;
+	Dres >> CHKRes; //set the value of the resistance
+
+	while (IRES == 0)
+	{
+
+		if (CHKRes)
+		{
+			IRES = CHKRes;
+		}
+		else
+		{
+			pUI->PrintMsg("Invalid value please enter another value");
+			string res = pUI->GetSrting();
+			pUI->ClearStatusBar();
+			stringstream Dres(res); //convert the string to a double 
+			Dres >> CHKRes;
+		}
+	}
+
+
+
+	//get the label name from the user
+	pUI->PrintMsg("enter the Name of the label");
+	LBL = pUI->GetSrting();
+	pUI->ClearStatusBar();
+
+	int ID = (pManager->GetCompCount()) + 1;
+	Lamp* pR = new Lamp(pGInfo, ID, IRES, LBL);
 	pManager->AddComponent(pR);
 }
 
