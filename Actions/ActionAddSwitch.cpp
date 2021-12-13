@@ -36,7 +36,9 @@ void ActionAddSwitch::Execute()
 	pGInfo->PointsList[1].x = Cx + compWidth / 2;
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
-	Switch* pR = new Switch(pGInfo);
+	LBL = pUI->GetSrting(); //Get the name of the label of the switch
+	int ID = (pManager->GetCompCount()) + 1;
+	Switch* pR = new Switch(pGInfo, ID, LBL);
 	pManager->AddComponent(pR);
 }
 
