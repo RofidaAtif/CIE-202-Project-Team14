@@ -4,7 +4,8 @@
 #include "..\Defs.h"
 #include "..\UI\UI.h"
 #include "Connection.h"
-
+#include <iostream>
+#include<fstream>
 
 //Base class for all components (resistor, capacitor,....etc) .
 class Component
@@ -12,6 +13,8 @@ class Component
 private:
 	string m_Label;
 	bool CompSelected;
+	double m_Value;
+	int m_ID;
 protected:
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
@@ -27,7 +30,8 @@ protected:
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 
 public:
-	Component(GraphicsInfo *r_GfxInfo);
+	Component(GraphicsInfo *r_GfxInfo, int id, double val = 0, string lbl = "");
+	Component(GraphicsInfo* r_GfxInfo, int id, string lbl = "");
 	int getCompCenterX(UI*);
 	int getCompCenterY(UI*);
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
@@ -37,6 +41,7 @@ public:
 
 	virtual void Operate() = 0;	//Calculates the output voltage according to the inputs
 	virtual void Draw(UI* ) = 0;	//for each component to Draw itself
+	virtual void SaveFile(fstream& f) = 0;
 	
 	bool GetCompSelected(); 
 	//virtual int GetOutPinStatus()=0;	//returns status of outputpin if LED, return -1
@@ -46,8 +51,14 @@ public:
 
 	
 	Component();
+	void SetLabel(string lbl);
+	string GetLabel();
+	void SetValue(double val);
+	double GetValue();
+	int GetID();
 	
-	void CompSelect(int Sx,int Sy);
+	Component* CompSelect(int Sx,int Sy);
+	
 	
 	//Destructor must be virtual
 	virtual ~Component();
