@@ -10,7 +10,7 @@ void Buzzer::Draw(UI* pUI)
 	pUI->DrawBuzzer(*m_pGfxInfo); //update to draw resistor
 	pUI->DrawLabel(*m_pGfxInfo, GetLabel());
 }
-void Resistor::SaveFile(fstream& f) {
+void Buzzer::SaveFile(fstream& f) {
 	GraphicsInfo& Gfx = *m_pGfxInfo;
 
 	f << "BUZZER" << "       " << to_string(GetID()) << "       " << GetLabel() << "       " << GetValue() << "       " << to_string(Gfx.PointsList[0].x) << "       " << to_string(Gfx.PointsList[0].y) << endl;
