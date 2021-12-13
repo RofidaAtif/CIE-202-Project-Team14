@@ -11,6 +11,9 @@
 #include "UI\UI.h"
 #include "Actions\SwitchToSIM.h"
 #include "Actions\SwitchToDSN.h"
+#include "Actions\ActionEditComp.h"
+#include "Actions\ActionSave.h"
+#include <iostream>
 
 ApplicationManager::ApplicationManager()
 {
@@ -44,6 +47,7 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	int  DiffX, DiffY;
 	int compheight = pUI->getCompHeight();
 	int compwidth = pUI->getCompWidth();
+	
 	for (int i = 0; i < CompCount; i++) {
 		
 		DiffX = abs(x - CompList[i]->getCompCenterX(pUI)); //measure diffrence between x of clicked point and x of center of component
@@ -113,7 +117,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			pAct= new ActionAddConnection(this);
 			break;
-			
+		case EDIT_CompLabel:
+			pAct = new ActionEditComp(this,"el");
+			break;
+		case EDIT_CompValue:
+			pAct = new ActionEditComp(this, "ev");
+			break;
+		case SAVE:
+			pAct = new ActionSave(this);
+			break;
 		case EXIT:
 			///TODO: create ExitAction here
 			break;
