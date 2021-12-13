@@ -10,7 +10,7 @@ void Fuse::Draw(UI* pUI)
 	pUI->DrawFuse(*m_pGfxInfo); //update to draw resistor
 	pUI->DrawLabel(*m_pGfxInfo, GetLabel());
 }
-void Resistor::SaveFile(fstream& f) {
+void Fuse::SaveFile(fstream& f) {
 	GraphicsInfo& Gfx = *m_pGfxInfo;
 
 	f << "FUSE" << "       " << to_string(GetID()) << "       " << GetLabel() << "       " << GetValue() << "       " << to_string(Gfx.PointsList[0].x) << "       " << to_string(Gfx.PointsList[0].y) << endl;
