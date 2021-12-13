@@ -101,8 +101,18 @@ ActionType UI::GetUserAction()
 			case ITM_RES:	return ADD_RESISTOR;
 			case ITM_LAMP:  return ADD_LAMP;
 			case ITM_SWITCH:  return  ADD_SWITCH;
-			case ITM_CONN:  return ADD_CONNECTION;
-			case ITM_EXIT:	return EXIT;	
+			case ITM_BATTERY: return  ADD_BATTERY;
+			case ITM_GROUND:  return  ADD_GROUND;
+			case ITM_BUZZER:  return  ADD_BUZZER;
+			case ITM_FUSE:  return  ADD_FUSE;
+			case ITM_EXIT:	return EXIT;
+			case ACT_DEL:	return DEL;
+			case ACT_MOVE:	return MOVE;
+			case ACT_COPY:	return COPY;
+			case ACT_CUT:	return CUT;
+			case ACT_UNDO: return UNDO;
+			case ACT_REDO: return REDO;
+			case SIM: return SIM_MODE;
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 			}
@@ -119,7 +129,23 @@ ActionType UI::GetUserAction()
 	}
 	else	//Application is in Simulation mode
 	{
-		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
+		if (y >= 0 && y < ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / ToolItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case AMMETER:	return Ammeter;
+			case VOLTAMETER:  return Voltameter;
+			case VALIDATE: return Validate;
+			case DSN:  return DSN_MODE;
+			case ITM_EXIT1:	return EXIT;
+			default: return SIM_TOOL;	//A click on empty place in desgin toolbar
+			}	//This should be changed after creating the compelete simulation bar 
 	}
 
 }
@@ -206,8 +232,19 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_RES] = "images\\Menu\\Menu_Resistor.jpg";
 	MenuItemImages[ITM_LAMP] = "images\\Menu\\Menu_Lamp.jpg";
 	MenuItemImages[ITM_SWITCH] = "images\\Menu\\Menu_Switch.jpg";
-	MenuItemImages[ITM_CONN] = "images\\Menu\\Menu_Connection.jpg";
+	MenuItemImages[ITM_BATTERY] = "images\\Menu\\Menu_Battery.jpg";
+	MenuItemImages[ITM_GROUND] = "images\\Menu\\Menu_Ground.jpg";
+	MenuItemImages[ITM_BUZZER] = "images\\Menu\\Menu_Buzzer.jpg";
+	MenuItemImages[ITM_FUSE] = "images\\Menu\\Menu_Fuse.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ACT_MOVE] = "images\\Menu\\Menu_MOVE.jpg";
+	MenuItemImages[ACT_COPY] = "images\\Menu\\Menu_COPY.jpg";
+	MenuItemImages[ACT_CUT] = "images\\Menu\\Menu_CUT.jpg";
+	MenuItemImages[ACT_PASTE] = "images\\Menu\\Menu_PASTE.jpg";
+	MenuItemImages[ACT_DEL] = "images\\Menu\\Menu_DEL.jpg";
+	MenuItemImages[ACT_UNDO] = "images\\Menu\\Menu_UNDO.jpg";
+	MenuItemImages[ACT_REDO] = "images\\Menu\\Menu_REDO.jpg";
+	MenuItemImages[SIM] = "images\\Menu\\Menu_SIM.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -226,10 +263,22 @@ void UI::CreateDesignToolBar()
 void UI::CreateSimulationToolBar()
 {
 	AppMode = SIMULATION;	//Simulation Mode
-
+string MenuItemImages[ITM_SIM_CNT];
+	MenuItemImages[AMMETER] = "images\\Menu\\Menu_AMMETER.jpg";
+	MenuItemImages[VOLTAMETER] = "images\\Menu\\Menu_VOLTAMETER.jpg";
+	MenuItemImages[VALIDATE] = "images\\Menu\\Menu_Validate.jpg";
+	MenuItemImages[ITM_EXIT1] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[DSN] = "images\\Menu\\Menu_DSN.jpg";
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 
-
+	//Draw menu item one image at a time
+	for (int i = 0; i < ITM_SIM_CNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
+	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
+	
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 }
 
 //======================================================================================//
@@ -284,7 +333,71 @@ void UI::DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected) const
 }
 
 //TODO: Add similar functions to draw all other components
+void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string BatteryImage;
+	if (selected)
+		BatteryImage = "Images\\Comp\\Menu_Battery.jpg";	//use image of highlighted Battery
+	else
+		BatteryImage = "Images\\Comp\\Menu_Battery.jpg";	//use image of the normal Battery
 
+	//Draw battery at Gfx_Info (1st corner)
+	pWind->DrawImage(BatteryImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string GroundImage;
+	if (selected)
+		GroundImage = "Images\\Comp\\Menu_Ground.jpg";	//use image of highlighted Battery
+	else
+		GroundImage = "Images\\Comp\\Menu_Ground.jpg";	//use image of the normal Battery
+
+	//Draw battery at Gfx_Info (1st corner)
+	pWind->DrawImage(GroundImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string BuzzerImage;
+	if (selected)
+		BuzzerImage = "Images\\Comp\\Menu_Buzzer.jpg";	//use image of highlighted Battery
+	else
+		BuzzerImage = "Images\\Comp\\Menu_Buzzer.jpg";	//use image of the normal Battery
+
+	//Draw battery at Gfx_Info (1st corner)
+	pWind->DrawImage(BuzzerImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawFuse(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string FuseImage;
+	if (selected)
+		FuseImage = "Images\\Comp\\Menu_Fuse.jpg";	//use image of highlighted Battery
+	else
+		FuseImage = "Images\\Comp\\Menu_Fuse.jpg";	//use image of the normal Battery
+
+	//Draw battery at Gfx_Info (1st corner)
+	pWind->DrawImage(FuseImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+//TODO: Add similar functions to draw all other components
+
+void UI::switchtosim()
+{
+	AppMode = SIMULATION;
+};
+
+
+void UI::switchtodsn()
+{
+	AppMode = DESIGN;
+};
+
+void UI::ClearWindow() {
+
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, width, height - StatusBarHeight);
+
+
+}
 
 
 
