@@ -16,8 +16,10 @@ enum ActionType
 	ADD_CONNECTION,		//Add a Wire Connection
 
 	ADD_Label,			//Add Label to a Component, a Connection
-	EDIT_Label,			//Edit Label of a Component, a Connection
+	EDIT_CompLabel,			//Edit Label of a Component, a Connection
 
+	EDIT_CompValue,
+	
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
 	SELECT,		//Select a Component, a Connection
