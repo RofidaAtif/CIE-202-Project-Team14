@@ -1,6 +1,7 @@
 #pragma once
 #include "../UI/UI.h"
-
+#include <iostream>
+#include<fstream>
 
 
 class Component;	//forward class declaration
@@ -11,11 +12,15 @@ class Connection
 	Component	*Cmpnt1, *Cmpnt2;
 	GraphicsInfo *pGfxInfo;	//The parameters required to draw a connection
 	bool ConnSelected;
+	string LBL;
 
 public:
-	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr);
+	Connection(GraphicsInfo* r_GfxInfo, string lbl= "Label", Component* cmp1 = nullptr, Component* cmp2 = nullptr);
 
 	virtual void Draw(UI* );	//for connection to Draw itself
-	void ConnSelect(int Sx, int Sy);
+	Connection* ConnSelect(int Sx, int Sy);
+	void SaveFile(fstream& f, int id1, int id2);
+	Component* GetComp1();
+	Component* GetComp2();
 	
 };
