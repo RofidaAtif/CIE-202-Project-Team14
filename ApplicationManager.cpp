@@ -2,23 +2,27 @@
 #include "Actions\ActionAddRes.h"
 #include "Actions\ActionAddSwitch.h"
 #include "Actions\ActionAddLamp.h"
-#include "Actions\ActionSelection.h"
-#include "Actions\ActionAddConnection.h"
-#include "Actions\ActionAddBattery.h"
 #include "Actions\ActionAddGround.h"
+#include "Actions\ActionAddBattery.h"
 #include "Actions\ActionAddBuzzer.h"
 #include "Actions\ActionAddFuse.h"
-#include "UI\UI.h"
+#include "Actions\ActionSelection.h"
+#include "Actions\ActionAddConnection.h"
+#include "Actions\ActionEditComp.h"
+#include "Actions\ActionEditConn.h"
+#include "Actions\ActionSave.h"
+#include "Actions\ActionLoad.h"
 #include "Actions\SwitchToSIM.h"
 #include "Actions\SwitchToDSN.h"
-#include "Actions\ActionEditComp.h"
-#include "Actions\ActionSave.h"
+using namespace std;
 #include <iostream>
 
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
 	ConnCount = 0;
+	SLComp = nullptr;
+	SLConn = nullptr;
 	
 	for(int i=0; i<MaxCompCount; i++)
 		CompList[i] = nullptr;
@@ -31,7 +35,7 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;		
+	CompList[CompCount++] = pComp;
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -47,11 +51,10 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	int  DiffX, DiffY;
 	int compheight = pUI->getCompHeight();
 	int compwidth = pUI->getCompWidth();
-	
 	for (int i = 0; i < CompCount; i++) {
 		
-		DiffX = abs(x - CompList[i]->getCompCenterX(pUI)); //measure diffrence between x of clicked point and x of center of component
-		DiffY = abs(y - CompList[i]->getCompCenterY(pUI)); //measure diffrence between y of clicked point and y of center of component
+		DiffX = abs(x - CompList[i]->getCompCenterX(pUI));
+		DiffY = abs(y - CompList[i]->getCompCenterY(pUI));
 		
 		if ((DiffY <= compheight / 2) && (DiffX <= compwidth / 2))
 		{
@@ -91,6 +94,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_SWITCH:
 			pAct = new ActionAddSwitch(this);
 			break;
+
 		case ADD_BATTERY:
 			pAct = new ActionAddBattery(this);
 			break;
@@ -103,13 +107,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_FUSE:
 			pAct = new ActionAddFuse(this);
 			break;
-		case SIM_MODE: 
+		case SIM_MODE:
 			pAct = new SwitchToSIM(this);
 			break;
 		case DSN_MODE:
 			pAct = new SwitchToDSN(this);
 			break;
-			
+
 		case SELECT:
 			pAct = new ActionSelection(this);
 			break;
@@ -117,14 +121,24 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			pAct= new ActionAddConnection(this);
 			break;
+			
 		case EDIT_CompLabel:
 			pAct = new ActionEditComp(this,"el");
 			break;
 		case EDIT_CompValue:
 			pAct = new ActionEditComp(this, "ev");
 			break;
+		case EDIT_ConnLabel:
+			pAct = new ActionEditConn(this, "el");
+			break;
+		case EDIT_ConnTerm:
+			pAct = new ActionEditConn(this, "ev");
+			break;
 		case SAVE:
 			pAct = new ActionSave(this);
+			break;
+		case LOAD:
+			pAct = new ActionLoad(this);
 			break;
 		case EXIT:
 			///TODO: create ExitAction here
@@ -143,24 +157,40 @@ Component* ApplicationManager::GetCompList(int i)
 {
 	return CompList[i];
 }
+
+void ApplicationManager::ClearCompList(int i)
+{
+	CompList[i] = nullptr;
+}
 ////////////////////////////////////////////////////////////////////
 
 Connection* ApplicationManager::GetConnList(int i)
 {
 	return ConnList[i];
 }
-
+void ApplicationManager::ClearConnList(int i)
+{
+	ConnList[i] = nullptr;
+}
 
 ////////////////////////////////////////////////////////////////////
 int ApplicationManager::GetCompCount()
 {
 	return CompCount;
 }
+void ApplicationManager::clearCompCount()
+{
+	CompCount = 0;
+}
 
 ////////////////////////////////////////////////////////////////////
 int ApplicationManager::GetConnCount()
 {
 	return ConnCount;
+}
+void ApplicationManager::clearConnCount()
+{
+	ConnCount = 0;
 }
 
 ////////////////////////////////////////////////////////////////////	
@@ -179,6 +209,26 @@ UI* ApplicationManager::GetUI()
 	return pUI;
 }
 
+
+Component* ApplicationManager::GetCompSEL()
+{
+	return SLComp;
+}
+
+void ApplicationManager::SetCompSEL(Component* SEL)
+{
+	SLComp = SEL;
+}
+
+Connection* ApplicationManager::GetConnSEL()
+{
+	return SLConn;
+}
+
+void ApplicationManager::SetConnSEL(Connection* SEL)
+{
+	SLConn = SEL;
+}
 ////////////////////////////////////////////////////////////////////
 
 ApplicationManager::~ApplicationManager()
