@@ -1,11 +1,13 @@
 #ifndef APPLICATION_MANAGER_H
 #define APPLICATION_MANAGER_H
 
+#include <sstream>
 #include "Defs.h"
 #include "UI\UI.h"
 #include "Actions\Action.h"
 #include "Components\Component.h"
 #include"Components\Connection.h"
+
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -18,6 +20,7 @@ private:
 	int CompCount;		//Actual number of Components
 	int ConnCount;	    //Actual number of Connections
 	Component* SLComp;
+	Connection* SLConn;
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
 
@@ -50,9 +53,14 @@ public:
 	int GetConnCount();
 	void AddConnection(Connection* pConn);
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
-
 	void SetCompSEL(Component* SEL);
 	Component* GetCompSEL();
+	void SetConnSEL(Connection* SEL);
+	Connection* GetConnSEL();
+	void ClearCompList(int i);
+	void ClearConnList(int i);
+	void clearCompCount();
+	void clearConnCount();
 
 	void savefile(fstream& f);
 
