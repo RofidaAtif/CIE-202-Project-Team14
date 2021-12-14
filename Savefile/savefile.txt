@@ -1,0 +1,6 @@
+2
+RES       1       res       55       251       275
+BLB       2       lmp       33       634       249
+Connections
+1
+1       2
