@@ -101,11 +101,14 @@ ActionType UI::GetUserAction()
 			case ITM_RES:	return ADD_RESISTOR;
 			case ITM_LAMP:  return ADD_LAMP;
 			case ITM_SWITCH:  return  ADD_SWITCH;
+			case ITM_CONN:  return ADD_CONNECTION;
 			case ITM_BATTERY: return  ADD_BATTERY;
 			case ITM_GROUND:  return  ADD_GROUND;
 			case ITM_BUZZER:  return  ADD_BUZZER;
 			case ITM_FUSE:  return  ADD_FUSE;
 			case ITM_EXIT:	return EXIT;
+			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
 			case ACT_DEL:	return DEL;
 			case ACT_MOVE:	return MOVE;
 			case ACT_COPY:	return COPY;
@@ -113,6 +116,7 @@ ActionType UI::GetUserAction()
 			case ACT_UNDO: return UNDO;
 			case ACT_REDO: return REDO;
 			case SIM: return SIM_MODE;
+				
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 			}
@@ -145,9 +149,9 @@ ActionType UI::GetUserAction()
 			case DSN:  return DSN_MODE;
 			case ITM_EXIT1:	return EXIT;
 			default: return SIM_TOOL;	//A click on empty place in desgin toolbar
-			}	//This should be changed after creating the compelete simulation bar 
+			}
+		}
 	}
-
 }
 
 void UI::SetX(int x)
@@ -245,6 +249,10 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ACT_UNDO] = "images\\Menu\\Menu_UNDO.jpg";
 	MenuItemImages[ACT_REDO] = "images\\Menu\\Menu_REDO.jpg";
 	MenuItemImages[SIM] = "images\\Menu\\Menu_SIM.jpg";
+	MenuItemImages[ITM_CONN] = "images\\Menu\\Menu_Connection.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\Menu\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\Menu\\Menu_Load.jpg";
+	
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -263,7 +271,7 @@ void UI::CreateDesignToolBar()
 void UI::CreateSimulationToolBar()
 {
 	AppMode = SIMULATION;	//Simulation Mode
-string MenuItemImages[ITM_SIM_CNT];
+	string MenuItemImages[ITM_SIM_CNT];
 	MenuItemImages[AMMETER] = "images\\Menu\\Menu_AMMETER.jpg";
 	MenuItemImages[VOLTAMETER] = "images\\Menu\\Menu_VOLTAMETER.jpg";
 	MenuItemImages[VALIDATE] = "images\\Menu\\Menu_Validate.jpg";
@@ -275,10 +283,11 @@ string MenuItemImages[ITM_SIM_CNT];
 	for (int i = 0; i < ITM_SIM_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
-	
+
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
+
 }
 
 //======================================================================================//
@@ -331,15 +340,20 @@ void UI::DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected) const
 	//Draw Resistor at Gfx_Info (1st corner)
 	pWind->DrawImage(LampImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
+void UI::DrawLabel(const GraphicsInfo& r_GfxInfo, string lbl, bool selected) const
+{
+	pWind->SetFont(15, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(BLACK);
+	pWind->DrawString(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y + COMP_WIDTH/4, lbl);
+}
 
-//TODO: Add similar functions to draw all other components
 void UI::DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BatteryImage;
 	if (selected)
-		BatteryImage = "Images\\Comp\\Menu_Battery.jpg";	//use image of highlighted Battery
+		BatteryImage = "Images\\Comp\\Battery_HI.jpg";	//use image of highlighted Battery
 	else
-		BatteryImage = "Images\\Comp\\Menu_Battery.jpg";	//use image of the normal Battery
+		BatteryImage = "Images\\Comp\\Battery.jpg";	//use image of the normal Battery
 
 	//Draw battery at Gfx_Info (1st corner)
 	pWind->DrawImage(BatteryImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
@@ -348,36 +362,36 @@ void UI::DrawGround(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string GroundImage;
 	if (selected)
-		GroundImage = "Images\\Comp\\Menu_Ground.jpg";	//use image of highlighted Battery
+		GroundImage = "Images\\Comp\\Ground_HI.jpg";	//use image of highlighted Battery
 	else
-		GroundImage = "Images\\Comp\\Menu_Ground.jpg";	//use image of the normal Battery
+		GroundImage = "Images\\Comp\\Ground.jpg";	//use image of the normal Battery
 
-	//Draw battery at Gfx_Info (1st corner)
+	//Draw ground at Gfx_Info (1st corner)
 	pWind->DrawImage(GroundImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string BuzzerImage;
 	if (selected)
-		BuzzerImage = "Images\\Comp\\Menu_Buzzer.jpg";	//use image of highlighted Battery
+		BuzzerImage = "Images\\Comp\\Buzzer_HI.jpg";	//use image of highlighted Battery
 	else
-		BuzzerImage = "Images\\Comp\\Menu_Buzzer.jpg";	//use image of the normal Battery
+		BuzzerImage = "Images\\Comp\\Buzzer.jpg";	//use image of the normal Battery
 
-	//Draw battery at Gfx_Info (1st corner)
+	//Draw buzzer at Gfx_Info (1st corner)
 	pWind->DrawImage(BuzzerImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 void UI::DrawFuse(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string FuseImage;
 	if (selected)
-		FuseImage = "Images\\Comp\\Menu_Fuse.jpg";	//use image of highlighted Battery
+		FuseImage = "Images\\Comp\\Fuse_HI.jpg";	//use image of highlighted Battery
 	else
-		FuseImage = "Images\\Comp\\Menu_Fuse.jpg";	//use image of the normal Battery
+		FuseImage = "Images\\Comp\\Fuse.jpg";	//use image of the normal Battery
 
-	//Draw battery at Gfx_Info (1st corner)
+	//Draw fuse at Gfx_Info (1st corner)
 	pWind->DrawImage(FuseImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
-//TODO: Add similar functions to draw all other components
+
 
 void UI::switchtosim()
 {
@@ -398,10 +412,6 @@ void UI::ClearWindow() {
 
 
 }
-
-
-
-
 
 
 UI::~UI()
