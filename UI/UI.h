@@ -41,6 +41,7 @@ class UI
 		ITM_RES,		//Resistor item in menu
 		ITM_LAMP,		//Lamp item in menu
 		ITM_SWITCH,		//Switch in menu
+		ITM_CONN,
 		ITM_BATTERY,
 		ITM_GROUND,
 		ITM_BUZZER,
@@ -52,10 +53,11 @@ class UI
 		ACT_DEL,
 		ACT_UNDO,
 		ACT_REDO,
-		ITM_EXIT,	//Exit item
-		SIM,
+		ITM_SAVE,
+		ITM_LOAD,
+		ITM_EXIT,		//Exit item
 		//TODO: Add more items names here
-	
+		SIM,
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	
 	};
@@ -69,7 +71,7 @@ class UI
 		VALIDATE,
 		ITM_EXIT1,
 		DSN,
-		
+
 		//ITM_CIRC_SIM,	//Circuit Simulate menu item
 	
 		//TODO:Add more items names here
@@ -82,15 +84,15 @@ class UI
 
 	MODE AppMode;		//Application Mode (design or simulation)
 	
-	static const int	width = 1500, height = 800,	//Window width and height
+	static const int	width = 1800, height = 1000,	//Window width and height
 						wx = 15 , wy = 15,			//Window starting coordinates
 						StatusBarHeight = 50,	//Status Bar Height
 						ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 						ToolItemWidth = 80,		//Width of each item in toolbar menu
 
 						//Arbitrary values, you can change as you wish
-						COMP_WIDTH = 80,		//Component Image width
-						COMP_HEIGHT = 30;		//Component Image height
+						COMP_WIDTH = 100,		//Component Image width
+						COMP_HEIGHT = 20;		//Component Image height
 
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
@@ -130,7 +132,7 @@ public:
 	void ClearDrawingArea() const;	//Clears the drawing area
 
 		
-	// Draws a component
+	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	void DrawSwitch(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawLamp(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
@@ -142,11 +144,14 @@ public:
 	void switchtodsn();
 	void ClearWindow();
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
-	
+
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	
 	void PrintMsg(string msg) const;	//Print a message on Status bar
+
+	//Draws a label
+	void DrawLabel(const GraphicsInfo& r_GfxInfo, string lbl, bool selected = false) const;
 
 	~UI();
 };
