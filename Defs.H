@@ -7,19 +7,21 @@
 enum ActionType 
 {
 	ADD_RESISTOR,		//Add a resistor
-	ADD_LAMP,			//Add a Switch
-	ADD_SWITCH,			//Add a LAMP
+	ADD_LAMP,			//Add LAMP
+	ADD_SWITCH,			//Add Switch
 	ADD_BATTERY,         // Add a Battery
 	ADD_GROUND,         // add a ground
 	ADD_BUZZER,         // add a buzzer
-	ADD_FUSE,           // add a fuse
-	ADD_CONNECTION,		//Add a Wire Connection
+	ADD_FUSE,
+	ADD_CONNECTION,		//Add Wire Connection
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_CompLabel,			//Edit Label of a Component, a Connection
 
 	EDIT_CompValue,
-	
+	EDIT_ConnLabel,
+	EDIT_ConnTerm,
+
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
 	SELECT,		//Select a Component, a Connection
@@ -32,7 +34,7 @@ enum ActionType
 	Ammeter,
 	Voltameter,
 	Validate,
-	
+
 	SAVE,		//Save the whole Circuit to a file
 	LOAD,		//Load a Circuit from a file
 
@@ -47,6 +49,7 @@ enum ActionType
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 	SIM_TOOL
+
 };
 
 enum  MODE	//Modes of operation
