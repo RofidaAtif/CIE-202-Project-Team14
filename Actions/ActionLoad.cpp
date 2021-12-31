@@ -98,6 +98,11 @@ void ActionLoad::Execute()
 				Ground* pR = new Ground(pGInfo, ID, Value, LBL);
 				pManager->AddComponent(pR);
 			}
+			else if (Type == "Mod")
+			{
+				Module* pR = new Module(pGInfo, ID, Value, LBL);
+				pManager->AddComponent(pR);
+			}
 
 
 

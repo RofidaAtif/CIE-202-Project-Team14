@@ -9,6 +9,8 @@
 #include "..\Components\Battery.h"
 #include "..\Components\Buzzer.h"
 #include "..\Components\Fuse.h"
+#include "..\Components\Module.h"
+
 using namespace std;
 
 
