@@ -13,6 +13,7 @@ enum ActionType
 	ADD_GROUND,         // add a ground
 	ADD_BUZZER,         // add a buzzer
 	ADD_FUSE,
+	ADD_MOD,
 	ADD_CONNECTION,		//Add Wire Connection
 
 	ADD_Label,			//Add Label to a Component, a Connection
@@ -30,7 +31,7 @@ enum ActionType
 	COPY,		//Copy a Component, a Connection
 	CUT,		//Cut a Component, a Connection
 	PASTE,		//Paste a Component, a Connection
-
+	
 	Ammeter,
 	Voltameter,
 	Validate,
