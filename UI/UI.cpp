@@ -31,6 +31,22 @@ int UI::getCompHeight() const
 {
 	return COMP_HEIGHT;
 }
+int  UI::getWidowWidth() const
+{
+	return width;
+}
+int  UI::getWidowHeight() const
+{
+	return height;
+}
+int  UI::getStatusBarHeight() const
+{
+	return StatusBarHeight;
+}
+int  UI::getToolBarHeight() const
+{
+	return ToolBarHeight;
+}
 
 //======================================================================================//
 //								Input Functions 										//
