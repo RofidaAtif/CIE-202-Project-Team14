@@ -114,6 +114,7 @@ ActionType UI::GetUserAction()
 			case ACT_MOVE:	return MOVE;
 			case ACT_COPY:	return COPY;
 			case ACT_CUT:	return CUT;
+			case ACT_PASTE:	return PASTE;
 			case ACT_UNDO: return UNDO;
 			case ACT_REDO: return REDO;
 			case SIM: return SIM_MODE;
@@ -241,12 +242,12 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_GROUND] = "images\\Menu\\Menu_Ground.jpg";
 	MenuItemImages[ITM_BUZZER] = "images\\Menu\\Menu_Buzzer.jpg";
 	MenuItemImages[ITM_FUSE] = "images\\Menu\\Menu_Fuse.jpg";
-	MenuItemImages[ADD_MOD] = "images\\Menu\\Menu_MOD.jpg";
+	MenuItemImages[ITM_MOD] = "images\\Menu\\Menu_MOD.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 	MenuItemImages[ACT_MOVE] = "images\\Menu\\Menu_MOVE.jpg";
 	MenuItemImages[ACT_COPY] = "images\\Menu\\Menu_COPY.jpg";
 	MenuItemImages[ACT_CUT] = "images\\Menu\\Menu_CUT.jpg";
-	MenuItemImages[ACT_PASTE] = "images\\Menu\\Menu_Paste.jpg";
+	MenuItemImages[ACT_PASTE] = "images\\Menu\\Menu_PASTE.jpg";
 	MenuItemImages[ACT_DEL] = "images\\Menu\\Menu_DEL.jpg";
 	MenuItemImages[ACT_UNDO] = "images\\Menu\\Menu_UNDO.jpg";
 	MenuItemImages[ACT_REDO] = "images\\Menu\\Menu_REDO.jpg";
