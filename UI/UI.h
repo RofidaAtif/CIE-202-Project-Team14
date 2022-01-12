@@ -110,6 +110,10 @@ public:
 	UI();
 	int getCompWidth() const;	//returns Component width
 	int getCompHeight() const;	//returns Component height
+        int getWidowWidth() const;  
+        int getWidowHeight() const;
+        int getStatusBarHeight() const;
+        int getToolBarHeight() const;
 	void SetX(int x);
 	void SetY(int y);
 	int GetX();
