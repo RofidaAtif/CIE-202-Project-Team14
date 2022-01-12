@@ -57,7 +57,6 @@ class UI
 		ITM_SAVE,
 		ITM_LOAD,
 		ITM_EXIT,		//Exit item
-		
 		//TODO: Add more items names here
 		SIM,
 		ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
