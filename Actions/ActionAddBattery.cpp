@@ -31,6 +31,27 @@ void ActionAddBattery::Execute()
 	//Calculate the rectangle Corners
 	int compWidth = pUI->getCompWidth();
 	int compHeight = pUI->getCompHeight();
+		
+	int WindowHeight = pUI->getWidowHeight();
+	int WindowWidth = pUI->getWidowWidth();
+
+	int StatusBarHeight = pUI->getStatusBarHeight();
+	int ToolBarHeight = pUI->getToolBarHeight();
+
+
+	while ( (Cy - (compWidth /2) < ToolBarHeight) || (Cy + (compWidth / 2) > (WindowHeight - StatusBarHeight)))
+	{
+		pUI->PrintMsg("Click anywhere in the design area Only");
+		pUI->GetPointClicked(Cx, Cy);
+		pUI->ClearStatusBar();
+	}
+
+	while ((Cx - (compWidth / 2) < 0) || (Cx + (compWidth / 2) > WindowWidth))
+	{
+		pUI->PrintMsg("Click anywhere in the design area Only");
+		pUI->GetPointClicked(Cx, Cy);
+		pUI->ClearStatusBar();
+	}
 
 	pGInfo->PointsList[0].x = Cx - compWidth / 2;
 	pGInfo->PointsList[0].y = Cy - compHeight / 2;
