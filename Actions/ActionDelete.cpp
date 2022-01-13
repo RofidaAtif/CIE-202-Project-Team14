@@ -29,6 +29,7 @@ void ActionDelete::Execute()
 			pManager->DelConnList(i + 1);
 
 		}
+		pManager->SetConnSEL(nullptr);
 		
 	}
 	else if (pManager->GetCompSEL())
@@ -75,6 +76,7 @@ void ActionDelete::Execute()
 			
 
 		}
+		pManager->SetCompSEL(nullptr);
 	}
 
 }
